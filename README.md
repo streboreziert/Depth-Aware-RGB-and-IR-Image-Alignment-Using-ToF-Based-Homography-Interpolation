@@ -13,13 +13,13 @@ However, to fit a linear model for each homography element, we selected the two 
 
 ## Scripts
 
-### `Find_chessboard_corners.py`
+### Find_chessboard_corners.py
 This script detects 2D chessboard corners in input images. It:
 - Works with RGB, IR, or ToF images.
 - Saves the corner coordinates in text files.
 - Should be run first, before computing homographies.
 
-### `RGB_ToF_linear_homography.py`
+### RGB_ToF_linear_homography.py
 This script computes a linear depth-dependent homography from **ToF to RGB** using the corner points at two depths (100 cm and 250 cm in our case). It:
 - Loads corner files for RGB and ToF.
 - Computes homographies at both depths.
@@ -27,7 +27,7 @@ This script computes a linear depth-dependent homography from **ToF to RGB** usi
   H_ij(depth) = a + b * depth
 - Saves all 9 equations (from the 3×3 homography matrix) to "linear_depth_homography.txt".
 
-### `IR_ToF_linear_homography.py`
+### IR_ToF_linear_homography.py
 This script works exactly like the RGB version, but instead calculates homographies from **ToF to IR**. It follows the same steps:
 - Load corner points for IR and ToF.
 - Compute homographies at 100 cm and 250 cm.
