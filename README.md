@@ -9,7 +9,7 @@ To accurately map points between camera views (such as RGB and ToF), we compute 
 We assume that each element of the homography matrix varies linearly with depth. So, we compute homographies at two known depths and fit a linear model for each element.
 
 In our case, we captured chessboard images at 100 cm, 150 cm, 200 cm, and 250 cm.
-However, to fit a linear model for each homography element, we selected the two extreme depths: 100 cm and 250 cm. This provides a wider range for interpolation and simplifies the model to a first-order approximation.
+However, to fit a linear model for each homography element, we selected the two depths: 100 cm and 250 cm. This provides a wider range for interpolation and simplifies the model to a first-order approximation.
 
 ## Scripts
 
