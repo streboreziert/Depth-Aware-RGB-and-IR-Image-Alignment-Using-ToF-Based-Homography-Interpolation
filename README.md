@@ -41,14 +41,14 @@ This visualization script helps validate the homography alignment at a specific 
 - Computes homographies from IR and RGB to the Blaze frame.
 - Warps IR and RGB onto the Blaze image.
 - Creates a color-coded overlay:
-  - 🔴 Red: RGB
-  - 🟢 Green: IR
-  - 🔵 Blue: Blaze
+  - Red: RGB
+  - Green: IR
+  - Blue: Blaze
 
 - Also overlays chessboard dots:
-  - 🔵 Blaze (reference)
-  - 🟢 IR corners (after transformation)
-  - 🔴 RGB corners (after transformation)  
+  - Blaze (reference)
+  - IR corners (after transformation)
+  - RGB corners (after transformation)  
 
 ## How to Use
 
