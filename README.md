@@ -33,7 +33,7 @@ This script works exactly like the RGB version, but instead calculates homograph
 - Compute homographies at 100 cm and 250 cm.
 - Fit linear models and save them to "linear_depth_homography.txt".
 
-### .py
+### Chessboard_overlay_using_depth_aware_homography_at _static_depths.py
 
 This visualization script helps validate the homography alignment at a specific depth.
 - Loads Blaze (ToF), IR, and RGB images for the selected depth.
