@@ -33,6 +33,23 @@ This script works exactly like the RGB version, but instead calculates homograph
 - Compute homographies at 100 cm and 250 cm.
 - Fit linear models and save them to "linear_depth_homography.txt".
 
+### .py
+
+This visualization script helps validate the homography alignment at a specific depth.
+- Loads Blaze (ToF), IR, and RGB images for the selected depth.
+- Loads corresponding chessboard corners.
+- Computes homographies from IR and RGB to the Blaze frame.
+- Warps IR and RGB onto the Blaze image.
+- Creates a color-coded overlay:
+  - 🔴 Red: RGB
+  - 🟢 Green: IR
+  - 🔵 Blue: Blaze
+
+- Also overlays chessboard dots:
+  - 🔵 Blaze (reference)
+  - 🟢 IR corners (after transformation)
+  - 🔴 RGB corners (after transformation)  
+
 ## How to Use
 
 1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
