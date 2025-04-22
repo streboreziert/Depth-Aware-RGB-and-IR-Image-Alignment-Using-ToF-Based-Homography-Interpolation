@@ -67,4 +67,4 @@ else:
                 i, j = divmod(idx, 3)
                 f.write(f"H{i+1}{j+1}(d) = {a:.10f} + {b:.10f} * d\n")
 
-        print(" Saved homography model from ToF to RGB to 'linear_depth_homography.txt'")
+        print(" Saved homography model from ToF to RGB to 'linear_depth_homography_RGB_ToF.txt'")
