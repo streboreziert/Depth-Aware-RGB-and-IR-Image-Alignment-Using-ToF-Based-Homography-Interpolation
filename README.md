@@ -64,6 +64,17 @@ Visualizes how each element of the 3×3 homography matrix changes with depth.
     - Dashed lines show linear trends
 - Saves and displays the plot as 'homography_plot.png'
 
+### combine_checkerboard_corners.py
+
+ Combines multiple 2D chessboard corner files into one file per camera type (Blaze, IR, RGB).
+ 
+- Merges 5 input files per camera
+- Adds a comment header for each source file
+- Outputs:
+     - combined_cornersB.txt
+     - combined_cornersI.txt
+     - combined_cornersR.txt
+
 ## How to Use
 
 1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
