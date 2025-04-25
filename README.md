@@ -48,7 +48,21 @@ This visualization script helps validate the homography alignment at a specific 
 - Also overlays chessboard dots:
   - Blaze (reference)
   - IR corners (after transformation)
-  - RGB corners (after transformation)  
+  - RGB corners (after transformation)
+
+ 
+### homography_matrix_vs_depth_plot.py
+
+Visualizes how each element of the 3×3 homography matrix changes with depth.
+
+- Loads chessboard corner data for Blaze (reference), IR, and RGB
+- Computes homographies: IR → Blaze and RGB → Blaze
+- Plots each matrix element (H11–H33) across multiple depths
+- Overlay includes:
+    - Green dots: IR homography values
+    - Red squares: RGB homography values
+    - Dashed lines show linear trends
+- Saves and displays the plot as 'homography_plot.png'
 
 ## How to Use
 
