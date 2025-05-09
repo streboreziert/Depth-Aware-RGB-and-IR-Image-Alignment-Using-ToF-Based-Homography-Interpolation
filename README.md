@@ -18,6 +18,16 @@ This script detects 2D chessboard corners in input images. It:
 - Works with RGB, IR, or ToF images.
 - Saves the corner coordinates in text files.
 - Should be run first, before computing homographies.
+  
+### Find_chessbaord_using_adaptive_treshold.py
+
+Interactive tool for tuning thresholding and detecting chessboard corners in IR images.
+
+**Controls:**
+- `Trackbars`: Adjust intensity thresholds
+- `Enter`: Detect corners
+- `s`: Save detected image and corners to file
+- `q` or `ESC`: Quit
 
 ### RGB_ToF_linear_homography.py
 This script computes a linear depth-dependent homography from **ToF to RGB** using the corner points at two depths (100 cm and 250 cm in our case). It:
