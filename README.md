@@ -13,6 +13,12 @@ However, to fit a linear model for each homography element, we selected the two 
 
 ## Scripts
 
+### Convert_IR.py
+Converts a 16-bit infrared image (ir.tif) to 8-bit (ir_8bit.tif) for easier display and processing.
+- Reads the IR image as 16-bit grayscale.
+- Normalizes values to 0–255.
+- Converts to 8-bit and saves.
+
 ### Find_chessboard_corners.py
 This script detects 2D chessboard corners in input images. It:
 - Works with RGB, IR, or ToF images.
