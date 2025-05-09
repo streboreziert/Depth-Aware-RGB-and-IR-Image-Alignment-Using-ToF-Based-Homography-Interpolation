@@ -99,6 +99,69 @@ Each file must contain comma-separated 2D points, grouped by depth (e.g., 42 poi
 Output
 - homography_plot.png — 9-panel plot showing matrix elements vs. depth
 
+### Depth-Aware_IR_RGB_ToF_Alignment.py
+
+This Python script aligns an infrared (IR) image to an RGB image using per-pixel depth information from a Blaze Time-of-Flight (ToF) camera. The transformation is done using **depth-dependent homography matrices**, allowing accurate multi-modal fusion.
+
+---
+
+## Overview of Code Functionality
+
+### 1. Read and Parse Binary `.ply` File
+- Detects the start of binary vertex data in `blaze.ply`.
+- Unpacks `(x, y, z, r, g, b)` for each point.
+- Converts it into `(row, col, z)` format and writes to `row_col_z.txt`.
+
+### 2. Build and Interpolate Z-Map
+- Loads `(row, col, z)` into a 2D array `z_map`.
+- Filters depth values using 1st–99th percentile range.
+- Interpolates missing values using **edge-aware Gaussian weights**.
+- Final depth map is saved to `interpolated_z.txt`.
+
+### 3. Compute Depth-Dependent Homographies
+- Uses hardcoded coefficients for IR and RGB camera matrices.
+- Each 3×3 homography matrix `H` is a function of depth `d`:
+  \[
+  H_{ij}(d) = a_{ij} + b_{ij} \cdot d
+  \]
+
+### 4. Map 3D Depth Points to IR and RGB Frames
+- For each pixel in `z_map`, converts the 2D point using the inverse of `H_ir(d)` and `H_rgb(d)`.
+- Results in `(row, col, depth, IR_x, IR_y, RGB_x, RGB_y)` saved to `depth_to_ir_rgb_mapping.txt`.
+
+### 5. Warp IR onto RGB Space
+- Loads `ir.tif` and `rgb.tif` using `PIL`.
+- For each mapped coordinate, inserts IR pixel into the RGB coordinate location.
+- Gaps are filled using nearest-neighbor inpainting (`scipy.ndimage.distance_transform_edt`).
+
+### 6. Output and Visualization
+- Saves full warped IR image as `warped_ir_aligned_to_rgb.png`.
+- Crops both IR and RGB images to a shared field of view.
+- Displays and saves a side-by-side image `cropped_side_by_side_ir_rgb.png`.
+
+---
+
+##Files and I/O
+
+### Input Files
+| Filename     | Description                  |
+|--------------|------------------------------|
+| `blaze.ply`  | Depth point cloud (640×480)  |
+| `ir.tif`     | Infrared image (320×240)     |
+| `rgb.tif`    | RGB image (1024×760)         |
+
+### Output Files
+| Filename                             | Description                              |
+|--------------------------------------|------------------------------------------|
+| `row_col_z.txt`                      | Raw Z-map (row, col, z)                  |
+| `interpolated_z.txt`                | Edge-aware interpolated depth map        |
+| `depth_to_ir_rgb_mapping.txt`       | Pixel-wise mapping from depth to IR/RGB  |
+| `warped_ir_aligned_to_rgb.png`      | Warped IR in RGB frame                   |
+| `cropped_side_by_side_ir_rgb.png`   | Cropped visual comparison                |
+
+---
+
+
 
 ## How to Use
 
