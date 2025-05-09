@@ -103,7 +103,7 @@ Output
 ## How to Use
 
 1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
-2. Run "Find_chessboard_corners.py" to extract and save 2D corner coordinates.
+2. Run "Find_chessboard_corners.py" or "Find_chessbaord_using_adaptive_treshold.py" to extract and save 2D corner coordinates.
 3. Run one of the homography scripts depending on your camera pair:
    - "RGB_ToF_linear_homography.py" for RGB and ToF alignment.
    - "IR_ToF_linear_homography.py" for IR and ToF alignment.
