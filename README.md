@@ -80,14 +80,14 @@ Visualizes how each element of the 3×3 homography matrix changes with depth.
 Visualizes how each element of the 3×3 homography matrix changes with depth for IR and RGB images aligned to a base reference.
 
 Input Files
-- `combined_cornersB.txt` — Base image corners  
-- `combined_cornersI.txt` — IR image corners  
-- `combined_cornersR.txt` — RGB image corners  
+- combined_cornersB.txt — Base image corners  
+- combined_cornersI.txt — IR image corners  
+- combined_cornersR.txt — RGB image corners  
 
 Each file must contain comma-separated 2D points, grouped by depth (e.g., 42 points per depth).
 
 Output
-- `homography_plot.png` — 9-panel plot showing matrix elements vs. depth
+- homography_plot.png — 9-panel plot showing matrix elements vs. depth
 
 
 ## How to Use
