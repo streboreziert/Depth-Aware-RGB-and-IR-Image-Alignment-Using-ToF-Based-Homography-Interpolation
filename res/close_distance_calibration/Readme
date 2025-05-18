@@ -1,3 +1,2 @@
-Image nr.2 is made at distance 100 cm 
-Image nr.1 is made at distance 79 cm
-These extra calibration are made to be able to work with Basler Blaze ToF camera short distance measurmnet setting. As once short distance setting is used, calibrations made at long distance setting become unreliable and uneffective.
+Image 2 was captured at a distance of 100 cm, while Image 1 was taken at 79 cm.
+These additional calibration images were specifically acquired to support the short-distance measurement mode of the Basler Blaze ToF camera. When this mode is enabled, calibration data obtained using the long-distance setting becomes unreliable and ineffective, making dedicated short-range calibration essential.
