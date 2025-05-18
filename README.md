@@ -13,17 +13,16 @@ However, to fit a linear model for each homography element, we selected the two 
 
 As a follow-up, we validate the model using circular features and aim to generalize the calibration method for robust depth-dependent multi-view alignment.
 
-##Requirements
+## Requirements
 
 Install the required libraries:
 
 ```bash
-pip install numpy opencv-python matplotlib scipy
+pip install numpy opencv-python matplotlib scipy pillow imageio
 ```
 
----
 
-##Clone and Run
+## Clone and Run
 
 ```bash
 git clone https://github.com/streboreziert/Depth-Aware-RGB-and-IR-Image-Alignment-Using-ToF-Based-Homography-Interpolation.git
