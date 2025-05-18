@@ -17,12 +17,12 @@ As a follow-up, we validate the model using circular features and aim to general
 
 ## Requirements
 
-Install the required libraries:
-
-```bash
-pip install numpy opencv-python matplotlib scipy pillow imageio
-```
-
+- numpy  
+- opencv-python  
+- matplotlib  
+- scipy  
+- pillow  
+- imageio
 
 ## Clone and Run
 
