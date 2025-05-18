@@ -33,17 +33,153 @@ cd Depth-Aware-RGB-and-IR-Image-Alignment-Using-ToF-Based-Homography-Interpolati
 
 ## How to Use
 
-1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
-2. Run "Find_chessboard_corners.py" or "Find_chessbaord_using_adaptive_treshold.py" to extract and save 2D corner coordinates.
-3. Run one of the homography scripts depending on your camera pair:
-   - "RGB_ToF_linear_homography.py" for RGB and ToF alignment.
-   - "IR_ToF_linear_homography.py" for IR and ToF alignment.
-4. The script will ask you to enter the two depths used (100 and 250 in our case).
-5. It will generate a file with equations that define how each homography matrix element changes with depth.
+This section provides the full workflow for performing depth-aware RGB and IR image alignment using ToF-based homography interpolation.
 
-## Output
+### 1. Capture Calibration Images
 
-Each script produces a file called "linear_depth_homography.txt" that looks like this:
+Capture chessboard images at two or more known depths (e.g., 100 cm and 250 cm) from all three cameras: RGB, IR, and ToF (Blaze). Ensure the chessboard is clearly visible and flat in the scene.
+
+Store the images in an organized folder structure by depth and camera type.
+
+---
+
+### 2. Detect Chessboard Corners
+
+Run one of the following scripts to detect and save the 2D chessboard corner coordinates:
+
+```bash
+python Find_chessboard_corners.py
+```
+or
+```bash
+python Find_chessboard_using_adaptive_treshold.py
+```
+
+These scripts will output text or `.npy` files containing the 2D corner coordinates for each image. Make sure that corners are detected consistently across all depths and all cameras. These corner files will be used to calculate homographies.
+
+---
+
+### 3. Compute Depth-Aware Homography
+
+Run the appropriate homography interpolation script depending on the camera pair:
+
+```bash
+python RGB_ToF_linear_homography.py
+```
+or
+```bash
+python IR_ToF_linear_homography.py
+```
+
+You will be prompted to enter the two reference depths (e.g., `100` and `250`). The script then:
+
+- Loads chessboard corner data for both cameras at those depths.
+- Computes homography matrices for each depth.
+- Fits a linear model to each of the 9 elements of the 3×3 homography matrix.
+- Outputs all equations to `linear_depth_homography.txt`.
+
+Each equation is of the form:
+```
+H_ij(z) = a * z + b
+```
+
+---
+
+### 4. Combine Corner Files Across Depths (Optional)
+
+To generate depth plots, you may need to merge the individual corner files:
+
+```bash
+python combine_checkerboard_corners.py
+```
+
+This script produces:
+- `combined_cornersB.txt` (Blaze / ToF)
+- `combined_cornersI.txt` (IR)
+- `combined_cornersR.txt` (RGB)
+
+Each file includes corners from multiple depths.
+
+---
+
+### 5. Plot Homography Element Trends (Optional)
+
+To visualize how each homography matrix element changes with depth, run:
+
+```bash
+python Graph_H_matrix_elements.py
+```
+
+This generates `homography_plot.png`, which includes 9 subplots (H11–H33) for both IR and RGB homographies against ToF.
+
+---
+
+### 6. Overlay Chessboard Alignment on ToF Frame (Optional)
+
+To visually validate alignment at a fixed depth:
+
+```bash
+python Chessboard_overlay_using_depth_aware_homography_at_static_depths.py
+```
+
+This script overlays the warped RGB and IR chessboard corners onto the ToF frame using the computed depth-aware homographies. It visualizes:
+- Colored overlays for RGB (red), IR (green), and Blaze (blue).
+- Warped corner positions to verify geometric consistency.
+
+---
+
+### 7. Run Final Alignment Pipeline (Full Image Warping)
+
+To align IR to RGB using per-pixel depth from a `.ply` file:
+
+```bash
+python Depth-Aware_IR_RGB_ToF_Alignment.py
+```
+
+This script performs the full transformation pipeline:
+1. Loads `blaze.ply` (point cloud) and extracts (x, y, z) data.
+2. Converts (x, y) to image coordinates (row, col), creating `row_col_z.txt`.
+3. Interpolates a dense depth map (`interpolated_z.txt`) using edge-aware smoothing.
+4. Loads the previously computed `linear_depth_homography.txt`.
+5. Computes per-pixel homography for each depth using the linear model.
+6. Transforms each IR pixel to RGB space using its local homography.
+7. Builds a warped IR image in RGB space and fills any gaps.
+8. Crops IR and RGB images to their common field of view.
+9. Saves the following outputs:
+
+   - `warped_ir_aligned_to_rgb.png`: final warped IR image in RGB space
+   - `cropped_side_by_side_ir_rgb.png`: visual side-by-side comparison
+   - `depth_to_ir_rgb_mapping.txt`: per-pixel map of depth + transformed coordinates
+
+---
+
+### Required Input Files
+
+| File                     | Description                                        |
+|--------------------------|----------------------------------------------------|
+| `blaze.ply`              | ToF 3D point cloud (binary PLY, 640×480)          |
+| `ir.tif`                 | 16-bit infrared image (320×240)                   |
+| `rgb.tif`                | RGB image (typically 1024×768)                    |
+| `linear_depth_homography.txt` | Fitted homography equations from step 3       |
+| Corner files             | From chessboard detection (e.g. `corners_rgb_100.txt`) |
+
+---
+
+### Output Files Summary
+
+| Output File                        | Description                                           |
+|------------------------------------|-------------------------------------------------------|
+| `row_col_z.txt`                    | Raw (row, col, depth) triplets from Blaze point cloud |
+| `interpolated_z.txt`              | Filled-in depth map (same resolution as Blaze)        |
+| `linear_depth_homography.txt`     | Linear model for each element of the 3×3 homography   |
+| `depth_to_ir_rgb_mapping.txt`     | Pixel-wise transformed coordinates and depth values   |
+| `warped_ir_aligned_to_rgb.png`    | Final warped IR image registered to RGB frame         |
+| `cropped_side_by_side_ir_rgb.png` | Cropped side-by-side IR and RGB image comparison      |
+
+---
+
+Follow this complete pipeline to achieve accurate depth-aware spatial alignment of multi-modal images captured from ToF, IR, and RGB sensors.
+
 
 
 ## Scripts
