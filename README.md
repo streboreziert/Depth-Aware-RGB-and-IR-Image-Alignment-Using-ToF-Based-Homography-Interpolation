@@ -13,6 +13,8 @@ However, to fit a linear model for each homography element, we selected the two 
 
 As a follow-up, we validate the model using circular features and aim to generalize the calibration method for robust depth-dependent multi-view alignment.
 
+![Demo Image](doc/procedure_block_diagram.png)
+
 ## Requirements
 
 Install the required libraries:
