@@ -13,6 +13,25 @@ However, to fit a linear model for each homography element, we selected the two 
 
 As a follow-up, we validate the model using circular features and aim to generalize the calibration method for robust depth-dependent multi-view alignment.
 
+##Requirements
+
+Install the required libraries:
+
+```bash
+pip install numpy opencv-python matplotlib scipy
+```
+
+---
+
+##Clone and Run
+
+```bash
+git clone https://github.com/streboreziert/Depth-Aware-RGB-and-IR-Image-Alignment-Using-ToF-Based-Homography-Interpolation.git
+cd Depth-Aware-RGB-and-IR-Image-Alignment-Using-ToF-Based-Homography-Interpolation
+```
+
+---
+
 ## How to Use
 
 1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
