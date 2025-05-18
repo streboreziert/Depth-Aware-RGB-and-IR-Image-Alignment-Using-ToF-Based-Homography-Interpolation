@@ -337,3 +337,22 @@ This Python script aligns an infrared (IR) image to an RGB image using per-pixel
 | `cropped_side_by_side_ir_rgb.png`   | Cropped visual comparison                |
 
 ---
+
+## Verification
+
+### Detect_RGB_circles.py
+
+This script detects circular features in an RGB image using the Hough Circle Transform.
+
+It performs the following steps:
+- Loads the RGB image in grayscale
+- Applies Gaussian blur to reduce noise
+- Detects circles using OpenCV's `cv2.HoughCircles`
+- Draws the detected circles and their indices
+- Saves the annotated image as `rgb_circles.png`
+- Outputs circle information (center and radius) to `detected_circles.txt`
+- Displays the result using matplotlib
+
+This tool is useful for verifying the position and shape of circular calibration objects in RGB frames.
+
+
