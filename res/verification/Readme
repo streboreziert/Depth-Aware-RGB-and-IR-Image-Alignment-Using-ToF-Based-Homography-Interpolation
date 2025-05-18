@@ -1,4 +1,4 @@
-** Note on Object Detection Thresholds and Calibration**
+Note on Object Detection Thresholds and Calibration**
 
 - The threshold for red object detection must be adjusted **per image**, as lighting and exposure vary between shots.
 - For the **100 cm image**, the **"close" Basler Blaze camera setting** was used.
