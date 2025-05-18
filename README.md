@@ -182,7 +182,7 @@ Follow this complete pipeline to achieve accurate depth-aware spatial alignment 
 
 
 
-## Scripts
+## Script explanations 
 
 ### Convert_IR.py
 Converts a 16-bit infrared image (ir.tif) to 8-bit (ir_8bit.tif) for easier display and processing.
