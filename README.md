@@ -355,4 +355,17 @@ It performs the following steps:
 
 This tool is useful for verifying the position and shape of circular calibration objects in RGB frames.
 
+### Detect_IR_image_circle.py
 
+This script processes a grayscale IR image to identify the main thermal region and analyze its shape characteristics.
+
+It performs the following steps:
+- Applies Gaussian blur for noise reduction
+- Uses Otsu’s thresholding to binarize the image
+- Finds all external contours and selects the largest
+- Computes the centroid (center of mass) of the region
+- Calculates both maximum and average distances from the centroid to the contour edge
+- Annotates and saves the result image with center and radius overlays
+- Logs the computed shape metrics to a text file
+
+Useful for verifying IR blob consistency, measuring heat spread, or validating warping accuracy in multi-modal sensor alignment tasks.
