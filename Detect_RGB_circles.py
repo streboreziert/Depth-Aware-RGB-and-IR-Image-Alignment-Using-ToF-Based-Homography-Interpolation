@@ -7,7 +7,7 @@ def process_image(image_path, label, output_img_name):
     # Load image in grayscale
     gray = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     if gray is None:
-        print(f"❌ Error: Could not load {image_path}")
+        print(f"Error: Could not load {image_path}")
         return [], None
 
     # Apply Gaussian blur to reduce noise
@@ -39,14 +39,13 @@ def process_image(image_path, label, output_img_name):
             results.append((label, i + 1, x, y, r))
             print(f"{label} Circle {i+1}: Center = ({x}, {y}), Radius = {r}")
     else:
-        print(f"⚠️ No circles detected in {label} image.")
+        print(f"No circles detected in {label} image.")
 
     # Save the output image
     cv2.imwrite(output_img_name, output)
 
     return results, output
 
-# --- MAIN PROCESS ---
 
 # File paths
 ir_image = "ir.png"
@@ -68,7 +67,7 @@ if all_results:
                header="Image Circle# Center_X Center_Y Radius", comments='')
     print("✅ Results saved to detected_circles.txt")
 else:
-    print("⚠️ No circles found to write to file.")
+    print("No circles found.")
 
 # Visual display
 fig, axs = plt.subplots(1, 2, figsize=(14, 6))
