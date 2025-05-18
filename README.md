@@ -17,6 +17,7 @@ As a follow-up, we validate the model using circular features and aim to general
 
 ## Requirements
 
+Python libaries:
 - numpy  
 - opencv-python  
 - matplotlib  
