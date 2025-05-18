@@ -51,11 +51,11 @@ Store the images in an organized folder structure by depth and camera type.
 Run one of the following scripts to detect and save the 2D chessboard corner coordinates:
 
 ```bash
-python Find_chessboard_corners.py
+python find_chessboard_corners.py
 ```
 or
 ```bash
-python Find_chessboard_using_adaptive_treshold.py
+python find_chessboard_using_adaptive_treshold.py
 ```
 
 These scripts will output text or `.npy` files containing the 2D corner coordinates for each image. Make sure that corners are detected consistently across all depths and all cameras. These corner files will be used to calculate homographies.
@@ -67,11 +67,11 @@ These scripts will output text or `.npy` files containing the 2D corner coordina
 Run the appropriate homography interpolation script depending on the camera pair:
 
 ```bash
-python RGB_ToF_linear_homography.py
+python rgb_tof_linear_homography.py
 ```
 or
 ```bash
-python IR_ToF_linear_homography.py
+python ir_tof_linear_homography.py
 ```
 
 You will be prompted to enter the two reference depths (e.g., `100` and `250`). The script then:
@@ -110,7 +110,7 @@ Each file includes corners from multiple depths.
 To visualize how each homography matrix element changes with depth, run:
 
 ```bash
-python Graph_H_matrix_elements.py
+python graph_h_matrix_elements.py
 ```
 
 This generates `homography_plot.png`, which includes 9 subplots (H11–H33) for both IR and RGB homographies against ToF.
@@ -122,7 +122,7 @@ This generates `homography_plot.png`, which includes 9 subplots (H11–H33) for 
 To visually validate alignment at a fixed depth:
 
 ```bash
-python Chessboard_overlay_using_depth_aware_homography_at_static_depths.py
+python chessboard_overlay_using_depth_aware_homography_at_static_depths.py
 ```
 
 This script overlays the warped RGB and IR chessboard corners onto the ToF frame using the computed depth-aware homographies. It visualizes:
@@ -136,7 +136,7 @@ This script overlays the warped RGB and IR chessboard corners onto the ToF frame
 To align IR to RGB using per-pixel depth from a `.ply` file:
 
 ```bash
-python Depth-Aware_IR_RGB_ToF_Alignment.py
+python depth-Aware_ir_rgb_tof_Alignment.py
 ```
 
 This script performs the full transformation pipeline:
@@ -187,19 +187,19 @@ Follow this complete pipeline to achieve accurate depth-aware spatial alignment 
 
 ## Script explanations 
 
-### Convert_IR.py
+### convert_IR.py
 Converts a 16-bit infrared image (ir.tif) to 8-bit (ir_8bit.tif) for easier display and processing.
 - Reads the IR image as 16-bit grayscale.
 - Normalizes values to 0–255.
 - Converts to 8-bit and saves.
 
-### Find_chessboard_corners.py
+### find_chessboard_corners.py
 This script detects 2D chessboard corners in input images. It:
 - Works with RGB, IR, or ToF images.
 - Saves the corner coordinates in text files.
 - Should be run first, before computing homographies.
   
-### Find_chessbaord_using_adaptive_treshold.py
+### find_chessbaord_using_adaptive_treshold.py
 
 Interactive tool for tuning thresholding and detecting chessboard corners in IR images.
 
@@ -209,7 +209,7 @@ Interactive tool for tuning thresholding and detecting chessboard corners in IR 
 - `s`: Save detected image and corners to file
 - `q` or `ESC`: Quit
 
-### RGB_ToF_linear_homography.py
+### rgb_tof_linear_homography.py
 This script computes a linear depth-dependent homography from **ToF to RGB** using the corner points at two depths (100 cm and 250 cm in our case). It:
 - Loads corner files for RGB and ToF.
 - Computes homographies at both depths.
@@ -217,13 +217,13 @@ This script computes a linear depth-dependent homography from **ToF to RGB** usi
   H_ij(depth) = a + b * depth
 - Saves all 9 equations (from the 3×3 homography matrix) to "linear_depth_homography.txt".
 
-### IR_ToF_linear_homography.py
+### ir_tof_linear_homography.py
 This script works exactly like the RGB version, but instead calculates homographies from **ToF to IR**. It follows the same steps:
 - Load corner points for IR and ToF.
 - Compute homographies at 100 cm and 250 cm.
 - Fit linear models and save them to "linear_depth_homography.txt".
 
-### Chessboard_overlay_using_depth_aware_homography_at _static_depths.py
+### chessboard_overlay_using_depth_aware_homography_at_static_depths.py
 
 This visualization script helps validate the homography alignment at a specific depth.
 - Loads Blaze (ToF), IR, and RGB images for the selected depth.
@@ -265,7 +265,7 @@ Visualizes how each element of the 3×3 homography matrix changes with depth.
      - combined_cornersI.txt
      - combined_cornersR.txt
 
-### Graph_H_matrix_elements.py
+### graph_h_matrix_elements.py
 
 Visualizes how each element of the 3×3 homography matrix changes with depth for IR and RGB images aligned to a base reference.
 
@@ -279,7 +279,7 @@ Each file must contain comma-separated 2D points, grouped by depth (e.g., 42 poi
 Output
 - homography_plot.png — 9-panel plot showing matrix elements vs. depth
 
-### Depth-Aware_IR_RGB_ToF_Alignment.py
+### depth-aware_ir_rgb_tof_alignment.py
 
 This Python script aligns an infrared (IR) image to an RGB image using per-pixel depth information from a Blaze Time-of-Flight (ToF) camera. The transformation is done using **depth-dependent homography matrices**, allowing accurate multi-modal fusion.
 
@@ -343,7 +343,7 @@ This Python script aligns an infrared (IR) image to an RGB image using per-pixel
 
 ## Verification
 
-### Detect_RGB_circles.py
+### detect_rgb_circles.py
 
 This script detects circular features in an RGB image using the Hough Circle Transform.
 
@@ -358,7 +358,7 @@ It performs the following steps:
 
 This tool is useful for verifying the position and shape of circular calibration objects in RGB frames.
 
-### Detect_IR_image_circle.py
+### detect_ir_image_circle.py
 
 This script processes a grayscale IR image to identify the main thermal region and analyze its shape characteristics.
 
