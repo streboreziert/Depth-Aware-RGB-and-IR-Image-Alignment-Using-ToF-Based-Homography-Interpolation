@@ -11,6 +11,23 @@ We assume that each element of the homography matrix varies linearly with depth.
 In our case, we captured chessboard images at 100 cm, 150 cm, 200 cm, and 250 cm.
 However, to fit a linear model for each homography element, we selected the two depths: 100 cm and 250 cm. This provides a wider range for interpolation and simplifies the model to a first-order approximation.
 
+As a follow-up, we validate the model using circular features and aim to generalize the calibration method for robust depth-dependent multi-view alignment.
+
+## How to Use
+
+1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
+2. Run "Find_chessboard_corners.py" or "Find_chessbaord_using_adaptive_treshold.py" to extract and save 2D corner coordinates.
+3. Run one of the homography scripts depending on your camera pair:
+   - "RGB_ToF_linear_homography.py" for RGB and ToF alignment.
+   - "IR_ToF_linear_homography.py" for IR and ToF alignment.
+4. The script will ask you to enter the two depths used (100 and 250 in our case).
+5. It will generate a file with equations that define how each homography matrix element changes with depth.
+
+## Output
+
+Each script produces a file called "linear_depth_homography.txt" that looks like this:
+
+
 ## Scripts
 
 ### Convert_IR.py
@@ -166,19 +183,3 @@ This Python script aligns an infrared (IR) image to an RGB image using per-pixel
 | `cropped_side_by_side_ir_rgb.png`   | Cropped visual comparison                |
 
 ---
-
-
-
-## How to Use
-
-1. Capture chessboard images at multiple known depths (e.g., 100 cm and 250 cm).
-2. Run "Find_chessboard_corners.py" or "Find_chessbaord_using_adaptive_treshold.py" to extract and save 2D corner coordinates.
-3. Run one of the homography scripts depending on your camera pair:
-   - "RGB_ToF_linear_homography.py" for RGB and ToF alignment.
-   - "IR_ToF_linear_homography.py" for IR and ToF alignment.
-4. The script will ask you to enter the two depths used (100 and 250 in our case).
-5. It will generate a file with equations that define how each homography matrix element changes with depth.
-
-## Output
-
-Each script produces a file called "linear_depth_homography.txt" that looks like this:
