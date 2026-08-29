@@ -1,4 +1,22 @@
-# Depth-Aware-RGB-and-IR-Image-Alignment-Using-ToF-Based-Homography-Interpolation
+# Depth-aware RGB / IR alignment
+
+IEEE ICNSC 2025 · Oulu · EDI
+
+**Idea:** a homography between cheap cameras is not one matrix — each element of H is linear in ToF depth. Calibrate at two distances, interpolate per pixel, warp IR onto RGB.
+
+Paper: [doi:10.1109/icnsc66229.2025.00078](https://doi.org/10.1109/icnsc66229.2025.00078)  
+Playground: [homo-quad](https://github.com/streboreziert/homo-quad) · [lab](https://robertstreize.com/lab.html#homo)
+
+```bash
+pip install -r requirements.txt
+python3 h_of_z.py --demo --z 175
+```
+
+`h_of_z.py` evaluates **H(z) = A + B·z** from `linear_depth_homography.txt` (or a demo shear) so you can poke the model without the full PLY pipeline.
+
+Scripts live under [`scr/`](scr/). Full walkthrough below.
+
+---
 
 This repository contains Python scripts for computing depth-dependent homography transformations between camera views—specifically from IR to ToF and from RGB to ToF. These transformations help align views captured from different sensors when the scene is observed at varying depths.
 
